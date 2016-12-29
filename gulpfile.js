@@ -11,6 +11,7 @@ var htmlreplace = require('gulp-html-replace');
 var browsersync = require('browser-sync');
 var purifyCSS = require('gulp-purifycss');
 var del = require('del');
+var ghPages = require('gulp-gh-pages');
 
 // Styles Task
 gulp.task('styles', function () {
@@ -78,6 +79,12 @@ gulp.task('browsersync', function(cb) {
 // clean dist folder
 gulp.task('clean', function (cb) {
   del(['dist'], cb);
+});
+
+// deploy to github
+gulp.task('deploy', function () {
+  return gulp.src('dist/')
+    .pipe(ghPages());
 });
 // Default task
 gulp.task('default',

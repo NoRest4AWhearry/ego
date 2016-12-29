@@ -83,7 +83,7 @@ gulp.task('clean', function (cb) {
 
 // deploy to github
 gulp.task('deploy', function () {
-  return gulp.src('dist/')
+  return gulp.src('./dist/**/*')
     .pipe(ghPages());
 });
 // Default task

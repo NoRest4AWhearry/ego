@@ -1,0 +1,375 @@
+$primeRed: #a20000;
+$darkRed: #600C0D;
+$offWhite: #fbf9f2;
+$ebony: #131313;
+$lightGrey: #777777;
+$border: 5px solid $primeRed;
+@mixin transform($deg, $transX, $transY) {
+  -webkit-transform: rotate($deg) translate($transX, $transY);
+  -moz-transform: rotate($deg) translate($transX, $transY);
+  -ms-transform: rotate($deg) translate($transX, $transY);
+  -o-transform: rotate($deg) translate($transX, $transY);
+  transform: rotate($deg) translate($transX, $transY)
+}
+@mixin blur($px) {
+  -webkit-filter: blur($px);
+  -moz-filter: blur($px);
+  -ms-filter: blur($px);
+  -o-filter: blur($px);
+  filter: blur($px);
+}
+@import "bootstrap";
+body {
+  font-family: 'Oswald', sans-serif !important;
+  line-height: 1.6 !important;
+  background-color: $ebony;
+}
+
+/* navigation */
+nav {
+  background: $offWhite;
+  border-bottom: 2px solid $darkRed;
+}
+.nav-fixed {
+  position: fixed;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  z-index: 1030;
+}
+.navigation {
+  background: $offWhite;
+  display: flex;
+  height: 90px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+
+  li {
+    position: relative;
+    display: inline;
+    vertical-align: middle;
+    padding: 12px 15px;
+    border-bottom-color: transparent;
+    transition: border-bottom-color .5s ease-in;
+
+    &:hover {
+      border-bottom: 5px solid $primeRed;
+    }
+
+    a {
+      color: $lightGrey;
+      display: inline-block;
+      text-decoration: none;
+      font-size: 30px;
+      letter-spacing: 2px;
+      transition: color .5s ease-in;
+
+      &:hover {
+        color: $primeRed;
+      }
+    }
+
+    &.egoBrand:hover{
+      border-bottom: 5px solid $primeRed;
+    }
+
+  }
+
+  button.icon {
+    display: none;
+  }
+}
+.navCollapse {
+  display: inline-block;
+  cursor: pointer;
+}
+.apad {
+  padding: 8px 0;
+}
+
+.bar1, .bar2, .bar3 {
+  height: 5px;
+  width: 35px;
+  background-color: $primeRed;
+  margin: 6px 0;
+  transition: 0.4s;
+}
+.change .bar1 {
+  @include transform(-45deg, -9px, 6px);
+}
+.change .bar2 {
+  opacity: 0;
+}
+.change .bar3 {
+  @include transform(45deg, -8px, -8px);
+}
+
+/* Video */
+.homepage-hero-module {
+  border-right: none;
+  border-left: none;
+  position: relative;
+}
+.no-video .video-container video, .touch .video-container video {
+  display: none;
+}
+.no-video .video-container .poster, .touch .video-container .poster {
+  display: block !important;
+}
+.video-container {
+  position: relative;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background: $ebony;
+
+  .logo-container {
+    position: absolute;
+    top: 35%;
+    width: 100%;
+    text-align: center;
+    color: $offWhite;
+    z-index: 1000;
+  }
+
+  video {
+    position: absolute;
+    bottom: 0;
+    z-index: 0;
+
+    &.fillWidth {
+      width: 100%;
+      height: auto;
+    }
+  }
+}
+
+/* SECTIONS */
+.component {
+  padding: 75px 0;
+  position: relative;
+  color: $lightGrey;
+  background: $ebony;
+
+  &:first-child {
+    background: $offWhite;
+  }
+
+  p, img {
+    margin: 30px 0;
+  }
+
+  h1 {
+    font-size: 3.5rem;
+    line-height: 50px;
+  }
+}
+
+// Angled Divs
+// abl = Angle Bottom Left
+// atl = Angle Top Left
+// atbr = Angle Top & Bottom Left
+
+.abl, .atl, .atbr {
+  z-index: 1;
+}
+%beforeAfters {
+  content: '';
+  background: inherit;
+  position: absolute;
+  display: block;
+  height: 50%;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  -webkit-backface-visibility: hidden;
+}
+.abl:after, .atl:after, .atbr:before, .atbr:after {
+  @extend %beforeAfters;
+}
+.abl, .atbr{
+  &:after{
+    bottom: 0;
+    transform: skewY(-1.5deg);
+    transform-origin: 100%;
+    border-bottom: $border;
+  }
+}
+.atl:after, .atbr:before{
+  top: 0;
+  transform: skewY(-1.5deg);
+  transform-origin: 0 0;
+  border-top: $border;
+}
+.vidReplacePic {
+  height: 70vh;
+  background: {
+    image: url(../img/rnb4.jpg);
+    position: center;
+    repeat: no-repeat;
+  }
+}
+
+/* PARALLAX SCROLLING */
+.event1, .event2, .event3, .about1, .about2, footer {
+  position: relative;
+  background: {
+    attachment: fixed;
+    position: center;
+    repeat: no-repeat;
+    size: cover;
+  }
+}
+.event1, .event2, .event3, .about1, .about2 {
+  @include blur(8px);
+}
+.event1 {
+  background-image: url(../img/rnb4.jpg);
+  height: 75vh;
+}
+.event2 {
+  background-image: url(../img/rnb3.jpg);
+  height: 75vh;
+}
+.event3 {
+  background-image: url(../img/rnb3.jpg);
+  height: 75vh;
+}
+.about1 {
+  background-image: url(../img/rnbcanvas.jpg);
+  height: 75vh;
+}
+.about2 {
+  background-image: url(../img/2girls.jpg);
+  height: 75vh;
+}
+
+/* FOOTER */
+footer {
+  background-color: $ebony;
+  height: 50px;
+  text-align: center;
+  section p {
+    position: absolute;
+    left: 0;
+    top: 25%;
+    width: 100%;
+    text-align: center;
+    color: $offWhite;
+  }
+
+  .copyright {
+    margin: 15px 0;
+    color: $lightGrey;
+
+    a {
+      color: $primeRed;
+    }
+  }
+
+  .connectWithUs {
+    margin: 15px 0;
+
+    .fa {
+      color: $primeRed;
+      font-size: 1.5em !important;
+    }
+
+    nav {
+      padding-bottom: 25px;
+
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+
+        li {
+          display: inline;
+          padding: 8px;
+
+          a {
+            color: $lightGrey;
+            text-decoration: none;
+
+            &:hover {
+              color: $primeRed;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+/* BACKGROUND IMAGE SLICER */
+.mySlides {
+  display: none;
+}
+.bkgdSlide {
+  height: 70vh;
+  background: {
+    image: url(../img/rnb4.jpg);
+    position: center;
+    size: cover;
+    repeat: no-repeat;
+  }
+}
+.slideshow-container {
+  position: relative;
+  margin: auto;
+}
+// Fading animation
+.fader {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: .5s;
+  animation-name: fade;
+  animation-duration: .5s;
+}
+@-webkit-keyframes fade {
+  from {
+    opacity: .9
+  }
+  to {
+    opacity: 1
+  }
+}
+@keyframes fade {
+  from {
+    opacity: .9
+  }
+  to {
+    opacity: 1
+  }
+}
+
+/* MISCELLANEOUS */
+#egomobileload {
+  visibility: hidden;
+}
+#about-header-img {
+  height: 70vh;
+  background: {
+    image: url(../img/djset.jpg);
+    repeat: no-repeat;
+    position: center;
+    size: cover;
+  }
+}
+img .img-center {
+  margin: 0 auto !important;
+}
+/* ABOUT PAGE */
+#about-header-img {
+  height: 70vh;
+  background: {
+    image: url(../img/djset.jpg);
+    position: center;
+    size: cover;
+    repeat: no-repeat;
+  }
+}
+@import "767";

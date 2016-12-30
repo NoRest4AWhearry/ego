@@ -2,3 +2,4 @@ node_modules/
 .idea/
 .publish/
 dist/
+src/css/

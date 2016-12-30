@@ -12,8 +12,9 @@ var browsersync = require('browser-sync');
 var purifyCSS = require('gulp-purifycss');
 var del = require('del');
 var ghPages = require('gulp-gh-pages');
-
+var sass = require('gulp-sass');
 // Styles Task
+/*
 gulp.task('styles', function () {
   var allCSS = ['src/css/bootstrap.css','src/css/main.css', 'src/css/*.css'];
   return gulp.src(allCSS)
@@ -23,7 +24,15 @@ gulp.task('styles', function () {
     .pipe(minifyCSS())
     .pipe(gulp.dest('dist/css/'));
 });
-
+*/
+gulp.task('styles', function () {
+  return gulp.src('src/scss/*.scss')
+    .pipe(sass())
+    .pipe(autoprefix('last 2 versions'))
+    .pipe(purifyCSS(['src/js/main.js', 'src/*.html']))
+    .pipe(minifyCSS())
+    .pipe(gulp.dest('dist/css/'));
+});
 // Scripts Task
 gulp.task('scripts',function () {
   var allJS = ['src/js/jquery.js', 'src/js/bootstrap.js', 'src/js/*.js'];
@@ -61,7 +70,7 @@ gulp.task('watch', function () {
   var scripts = ['scripts', browsersync.reload];
   var images = ['images', browsersync.reload];
   var html = ['replace', browsersync.reload];
-  gulp.watch('src/css/*.css', styles);
+  gulp.watch('src/scss/*.scss', styles);
   gulp.watch('src/js/*.js', scripts);
   gulp.watch('src/img/*', images);
   gulp.watch('src/*.html', html);

@@ -1,4 +1,4 @@
-$primeRed: #a20000;
+$primeRed: #a20500;
 $darkRed: #600C0D;
 $offWhite: #fbf9f2;
 $ebony: #131313;
@@ -23,6 +23,7 @@ body {
   font-family: 'Oswald', sans-serif !important;
   line-height: 1.6 !important;
   background-color: $ebony;
+  overflow-x: hidden;
 }
 
 /* navigation */
@@ -155,11 +156,23 @@ nav {
   color: $lightGrey;
   background: $ebony;
 
-  &:first-child {
+  &:not(:only-of-type) {
     background: $offWhite;
   }
+  .zoomItem {
+    margin:15px 0;
+    overflow: hidden;
+    border: $border;
 
-  p, img {
+    img {
+      transition: transform .75s;
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  p {
     margin: 30px 0;
   }
 
@@ -226,13 +239,19 @@ nav {
 }
 .event1, .event2, .event3, .about1, .about2 {
   @include blur(8px);
+  transition: filter .2s, transform .75s;
+
+  &:hover {
+    transform: scale(1.1);
+    @include blur(0px);
+  }
 }
 .event1 {
-  background-image: url(../img/rnb4.jpg);
+  background-image: url(../img/rnb9.jpg);
   height: 75vh;
 }
 .event2 {
-  background-image: url(../img/rnb3.jpg);
+  background-image: url(../img/rnb4.jpg);
   height: 75vh;
 }
 .event3 {
@@ -281,7 +300,7 @@ footer {
 
     nav {
       padding-bottom: 25px;
-
+      background: $ebony;
       ul {
         list-style-type: none;
         margin: 0;
@@ -310,7 +329,7 @@ footer {
   display: none;
 }
 .bkgdSlide {
-  height: 70vh;
+  height: 40vh;
   background: {
     image: url(../img/rnb4.jpg);
     position: center;
@@ -349,15 +368,6 @@ footer {
 /* MISCELLANEOUS */
 #egomobileload {
   visibility: hidden;
-}
-#about-header-img {
-  height: 70vh;
-  background: {
-    image: url(../img/djset.jpg);
-    repeat: no-repeat;
-    position: center;
-    size: cover;
-  }
 }
 img .img-center {
   margin: 0 auto !important;

@@ -2,6 +2,12 @@
     header {
         transition: margin-left .5s;
     }
+    .diag:before{
+        top: 0;
+        transform: skewY(-1.5deg);
+        transform-origin: 0 0;
+        border-top: 20px solid $primeRed;
+    }
     .navbtn button.icon {
         float: left;
         border: none;

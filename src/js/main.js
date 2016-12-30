@@ -136,6 +136,8 @@ function showImgSlides() {
 // image load on mobile
 function egoMobileLoad() {
   var loaderImg = document.querySelector('#egomobileload');
+  var image = Math.floor(Math.random() * 5 + 1);
+  loaderImg.style.backgroundImage = "url(../img/egoload"+image+".jpg)";
   loaderImg.style.top = window.pageYOffset + 'px';
   loaderImg.style.left = window.pageXOffset + 'px';
   $(loaderImg).delay(2000).fadeOut(500);
